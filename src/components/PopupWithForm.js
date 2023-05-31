@@ -1,41 +1,27 @@
-import Popup from "./Popup";
-export default class PopupWithForm extends Popup {
-    constructor({ popup, handleFormSubmit }) {
-        super(popup);
-        this._inputList = this._popup.querySelectorAll('.popup__input');
-        this._elementForm = this._getElement();
-        this._handleFormSubmit = handleFormSubmit;
-        this._buttonSubmit = this._popup.querySelector('.popup__save-button');
-        this.defaultMessage = this._buttonSubmit.textContent;
+import React from "react";
+
+function PopupWithForm({ title, name, isOpen }) {
+
+    function IsOpen(){
+        return(
+            document.querySelector('.popup').classList.add('popup_opened')
+        )
     }
-    _getElement() {
-        const formPopup = this._popup
-            .querySelector('.popup__form');
-        return formPopup;
-    }
-    setEventListeners() {
-        super.setEventListeners();
-        this._elementForm.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-            this._handleFormSubmit(this._getInputValues());
-        });
-    }
-    _getInputValues() {
-        this._formValues = {};
-        this._inputList.forEach(input => {
-            this._formValues[input.name] = input.value;
-        });
-        return this._formValues;
-    }
-    close() {
-        super.close();
-        this._elementForm.reset();
-    }
-    loading(isLoading, loadingMessage) {
-        if (isLoading) {
-            this._buttonSubmit.textContent = loadingMessage;
-        } else {
-            this._buttonSubmit.textContent = this.defaultMessage;
-        }
-    }
+        
+
+    return (
+        <div className={`popup popup-${name} ${{isOpen} ? 'popup_opened' : 'close'}`}>
+            
+            <div className="popup__container">
+                <h2 className="popup__title">Редактировать профиль</h2>
+                <form className="popup__form" name={name}>
+
+                    <button className="popup__save-button">{title}</button>
+                </form>
+                <button className="popup__close-button" type="button" aria-label="Закрыть"></button>
+                
+            </div>
+        </div>
+    )
 }
+export default PopupWithForm;
