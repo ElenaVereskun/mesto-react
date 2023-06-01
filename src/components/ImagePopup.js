@@ -1,14 +1,15 @@
-import Popup from "./Popup";
-export default class PopupWithImage extends Popup {
-    constructor(popup) {
-        super(popup);
-        this._link = this._popup.querySelector('.popup-photo__link')
-        this._name = this._popup.querySelector('.popup-photo__title')
-    }
-    open(name, link) {
-        super.open();
-        this._link.src = link;
-        this._name.textContent = name;
-        this._link.alt = name;
-    }
+import React from "react";
+
+function ImagePopup() {
+
+    return (
+        <div className="popup popup-photo">
+        <div className="popup-photo__container">
+            <div src="#" className="popup-photo__link" alt=" "></div>
+            <h2 className="popup-photo__title">заголовок</h2>
+            <button className="popup__close-button popup-photo__close-button" type="button" aria-label="Закрыть"></button>
+        </div>
+    </div>
+    )
 }
+export default ImagePopup;

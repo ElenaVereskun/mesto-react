@@ -1,4 +1,4 @@
-export default class Api {
+class Api {
     constructor(url, headers) {
         this.url = url;
         this.headers = headers
@@ -77,16 +77,16 @@ export default class Api {
         }).then(res => this._errorCheck(res))
     };
     //9. Обновление аватара пользователя
-    editAvatar(data) {
+    editAvatar() {
         return fetch(`${this.url}/users/me/avatar`, {
             method: 'PATCH',
             headers: {
                 authorization: '8f35f71b-a7e4-4bcd-adfc-0c93657d6d95',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
+/*             body: JSON.stringify({
                 avatar: data.link
-            })
+            }) */
         }).then(res => this._errorCheck(res))
     }
     _errorCheck(res) {
@@ -97,3 +97,10 @@ export default class Api {
         }
     }
 }
+
+const api = new Api('https://mesto.nomoreparties.co/v1/cohort-64',
+  {
+    authorization: '8f35f71b-a7e4-4bcd-adfc-0c93657d6d95'
+  }
+);
+export default api;
