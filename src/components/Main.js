@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState } from 'react';
 import api from "../utils/Api";
 import Card from "./Card";
 
@@ -8,12 +8,12 @@ function Main({
     onEditAvatar,
     onPhotoClick,
 }) {
-    const [userName, setUserName] = React.useState('');
-    const [userDescription, setUserDescription] = React.useState('');
-    const [userAvatar, setUserAvatar] = React.useState('');
-    const [cards, setCards] = React.useState([]);
+    const [userName, setUserName] = useState('');
+    const [userDescription, setUserDescription] = useState('');
+    const [userAvatar, setUserAvatar] = useState('');
+    const [cards, setCards] = useState([]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         api.getUserProfileInfo().then((data) => {
             setUserName(data.name);
             setUserDescription(data.about)
@@ -21,7 +21,7 @@ function Main({
         })
             .catch((err) => console.log(`Ошибка: ${err}`));
 
-         api.getCards()
+        api.getCards()
             .then((data) => {
                 setCards(
                     data.map((res) => ({
@@ -56,12 +56,11 @@ function Main({
                 </button>
             </section>
             <div>
-                <ul className="elements">                    
-                        {cards.map((card) => (
-                            <Card card={card} onCardClick={onPhotoClick}>
-                                <template key={card._id}></template>
-                            </Card>                            
-                        ))}                
+                <ul className="elements">
+                    {cards.map((card) => (
+                        <Card card={card} onCardClick={onPhotoClick} key={card._id}>
+                        </Card>
+                    ))}
                 </ul>
             </div>
         </main>

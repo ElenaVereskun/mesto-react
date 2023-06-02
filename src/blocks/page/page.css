@@ -4,6 +4,7 @@
     font-family: 'Inter', Arial, sans-serif;
     font-style: normal;
     max-width: 320px;
+    min-height: 100vh;
 }
 
 @media screen and (min-width: 1280px) {

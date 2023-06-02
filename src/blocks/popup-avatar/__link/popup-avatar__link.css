@@ -1,12 +1,12 @@
-.popup-avatar__link{
+.popup-avatar__link {
     display: flex;
     position: relative;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
-    width: 358px;
-    margin-left: 36px;
-    margin-right: 36px;
+    width: 240px;
+    margin-left: 22px;
+    margin-right: 22px;
     padding: 54px 0px 8px 0px;
     border-top: none;
     border-right: none;
@@ -16,4 +16,12 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+}
+
+@media screen and (min-width: 1280px) {
+    .popup-avatar__link {
+        width: 358px;
+        margin-left: 36px;
+        margin-right: 36px;
+    }
 }
