@@ -1,4 +1,6 @@
-.popup-profile__user {
+.popup-profile__user {    
+    display: flex;
+    position: relative;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
@@ -17,7 +19,7 @@
 }
 
 @media screen and (min-width: 1280px) {
-    popup-profile__user {
+    .popup-profile__user {
         margin-left: 36px;
         margin-right: 36px;
         width: 358px;

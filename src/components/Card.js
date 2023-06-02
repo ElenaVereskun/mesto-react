@@ -1,25 +1,26 @@
 import React from "react";
 
-function Card({props}) {
+function Card({card, onCardClick}) {
+  const {name, link} = card;
+
+  function handleClick() {
+    onCardClick(card);
+  } 
 
   return (
-    <div>
-      <template id="element-template">
         <li className="element">
           <div className="element__image">
             <button className="element__delete element__delete_none" type="button" aria-label="удаление"></button>
-            <img src=" " className="element__link" alt=" " />
+            <img src={link} className="element__link" alt={name} onClick={handleClick} />
           </div>
           <div className="element__caption">
-            <h2 className="element__title">{props.name}</h2>
+            <h2 className="element__title">{name}</h2>
             <div className="element__likes">
               <button className="element__like" type="button" aria-label="лайк"></button>
-              <p className="element__like-count">{props.likes}</p>
+              <p className="element__like-count">0</p>
             </div>
           </div>
-        </li>
-      </template>
-    </div>
+        </li>    
   )
 }
 export default Card;

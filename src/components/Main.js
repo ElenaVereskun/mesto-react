@@ -5,7 +5,8 @@ import Card from "./Card";
 function Main({
     onEditProfile,
     onAddPlace,
-    onEditAvatar
+    onEditAvatar,
+    onPhotoClick,
 }) {
     const [userName, setUserName] = React.useState('');
     const [userDescription, setUserDescription] = React.useState('');
@@ -20,14 +21,14 @@ function Main({
         })
             .catch((err) => console.log(`Ошибка: ${err}`));
 
-        api.getCards()
+         api.getCards()
             .then((data) => {
                 setCards(
                     data.map((res) => ({
                         likes: res.likes,
                         link: res.link,
                         name: res.name,
-                        cardId: res._id,
+                        key: res._id,
                     }))
                 );
             })
@@ -55,17 +56,12 @@ function Main({
                 </button>
             </section>
             <div>
-                <ul className="elements">
-                    <template id="element-template">
+                <ul className="elements">                    
                         {cards.map((card) => (
-                            <Card 
-                            link={card.link}
-                            name={card.name}
-                            likes={card.likes}
-                            key={card.cardId}
-                            />
-                        ))}
-                    </template>
+                            <Card card={card} onCardClick={onPhotoClick}>
+                                <template key={card._id}></template>
+                            </Card>                            
+                        ))}                
                 </ul>
             </div>
         </main>
