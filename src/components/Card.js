@@ -1,22 +1,46 @@
-import React from "react";
+import React from 'react';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-function Card({ card, onCardClick }) {
+function Card( {card, onCardClick, onCardLike} ) {
   const { name, link } = card;
+  const currentUser = React.useContext(CurrentUserContext);
 
   function handleClick() {
     onCardClick(card);
   }
 
+  function handleLikeClick(){
+    onCardLike(card);
+  }
+  
+  // Определяем, являемся ли мы владельцем текущей карточки  
+  const isOwn = card.owner._id === currentUser._id;
+
+  function handleDeleteClick(){
+   console.log('handleDeleteClick');
+  }
+  // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+  // Создаём переменную, которую после зададим в `className` для кнопки лайка
+    const cardLikeButtonClassName = ( 
+    `element__like ${isLiked && 'element__like_active'}` 
+   )
+ 
   return (
     <li className="element">
       <div className="element__image">
-        <button className="element__delete element__delete_none" type="button" aria-label="удаление"></button>
+        <button 
+        className={isOwn ? 'element__delete' : 'element__delete_none'}
+        onClick={handleDeleteClick}>
+        </button>
         <img src={link} className="element__link" alt={name} onClick={handleClick} />
       </div>
       <div className="element__caption">
         <h2 className="element__title">{name}</h2>
         <div className="element__likes">
-          <button className="element__like" type="button" aria-label="лайк"></button>
+          <button 
+          className={cardLikeButtonClassName}
+          onClick={handleLikeClick}></button>
           <p className="element__like-count">0</p>
         </div>
       </div>
