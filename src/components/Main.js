@@ -1,6 +1,4 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
-import api from "../utils/Api";
 import Card from "./Card";
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
@@ -10,9 +8,11 @@ function Main({
     onEditAvatar,
     onCardClick,
     onCardLike,
+    onCardDelete,
+    cards,
 }) {
     const currentUser = React.useContext(CurrentUserContext);
-    const [cards, setCards] = useState([]);
+/*     const [cards, setCards] = useState([]);
     useEffect(() => {
         api.getCards()
             .then((data) => {
@@ -22,12 +22,13 @@ function Main({
                         link: res.link,
                         name: res.name,
                         key: res._id,
+                        _id: res._id,
                         owner: res.owner,
                     }))
                 );
             })
-            .catch((err) => console.log(`Ошибка: ${err}`));
-    }, []);
+            .catch((err) => console.log(err));
+    }, []); */
 
     return (
         <main className="page">
@@ -55,8 +56,8 @@ function Main({
                         <Card card={card}
                             onCardClick={onCardClick}
                             onCardLike={onCardLike}
-                            key={card._id}
-                            value={currentUser} >
+                            onCardDelete={onCardDelete}
+                            key={card._id} >
                         </Card>
                     ))}
                 </ul>

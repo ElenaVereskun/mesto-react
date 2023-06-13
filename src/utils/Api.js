@@ -18,17 +18,13 @@ class Api {
             .then(res => this._errorCheck(res))
     }
     //3. Редактирование профиля
-    editUserInfo(data) {
+    editUserInfo() {
         return fetch(`${this.url}/users/me`, {
             method: 'PATCH',
             headers: {
                 authorization: '8f35f71b-a7e4-4bcd-adfc-0c93657d6d95',
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: data.name,
-                about: data.job
-            })
+            }
         })
             .then(res => this._errorCheck(res))
     }
@@ -84,9 +80,6 @@ class Api {
                 authorization: '8f35f71b-a7e4-4bcd-adfc-0c93657d6d95',
                 'Content-Type': 'application/json'
             },
-/*             body: JSON.stringify({
-                avatar: data.link
-            }) */
         }).then(res => this._errorCheck(res))
     }
     _errorCheck(res) {
