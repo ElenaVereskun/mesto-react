@@ -1,14 +1,14 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
-function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
+function EditAvatarPopup(props) {
 
     const avatarRef = React.useRef();
-    
+
     function handleSubmit(e) {
         e.preventDefault();
-        onUpdateAvatar({
-            avatar: avatarRef
+        props.onUpdateAvatar({
+            avatar: avatarRef.current.value
         });
     }
     return (
@@ -16,8 +16,8 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
             title={'Обновить аватар'}
             name={'avatar'}
             buttonText={'Сохранить'}
-            isOpen={isOpen}
-            onClose={onClose}
+            isOpen={props.isOpen}
+            onClose={props.onClose}
             onSubmit={handleSubmit}
             children={
                 <div>

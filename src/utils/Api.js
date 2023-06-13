@@ -18,28 +18,26 @@ class Api {
             .then(res => this._errorCheck(res))
     }
     //3. Редактирование профиля
-    editUserInfo() {
+    editUserInfo({ name, about }) {
         return fetch(`${this.url}/users/me`, {
             method: 'PATCH',
             headers: {
                 authorization: '8f35f71b-a7e4-4bcd-adfc-0c93657d6d95',
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify({ name, about })
         })
             .then(res => this._errorCheck(res))
     }
     //4. Добавление новой карточки
-    createCard(data) {
+    createCard({ place, link }) {
         return fetch(`${this.url}/cards`, {
             method: 'Post',
             headers: {
                 authorization: '8f35f71b-a7e4-4bcd-adfc-0c93657d6d95',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                name: data.name,
-                link: data.link
-            })
+            body: JSON.stringify({ place, link })
         }).then(res => this._errorCheck(res))
     }
     //7. Удаление карточки
@@ -73,13 +71,17 @@ class Api {
         }).then(res => this._errorCheck(res))
     };
     //9. Обновление аватара пользователя
-    editAvatar() {
+    editAvatar(data) {
         return fetch(`${this.url}/users/me/avatar`, {
             method: 'PATCH',
             headers: {
                 authorization: '8f35f71b-a7e4-4bcd-adfc-0c93657d6d95',
                 'Content-Type': 'application/json'
             },
+            body: JSON.stringify({
+                avatar: data.avatar
+            })
+
         }).then(res => this._errorCheck(res))
     }
     _errorCheck(res) {
@@ -92,8 +94,8 @@ class Api {
 }
 
 const api = new Api('https://mesto.nomoreparties.co/v1/cohort-64',
-  {
-    authorization: '8f35f71b-a7e4-4bcd-adfc-0c93657d6d95'
-  }
+    {
+        authorization: '8f35f71b-a7e4-4bcd-adfc-0c93657d6d95'
+    }
 );
 export default api;
