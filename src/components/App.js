@@ -90,10 +90,11 @@ function App() {
       })
       .catch((err) => console.log(`Ошибка изменения фото аватара: ${err}`));
   }
-  function handleAddPlaceSubmit({ place, link }) {
-    api.createCard({ place, link })
+  function handleAddPlaceSubmit({ name, link }) {
+    api.createCard({ name, link })
       .then((newCard) => {
         setCards([newCard, ...cards]);
+        closeAllPopups();
       })
       .catch((err) => console.log(`Ошибка добавления новой карточки: ${err}`));
   }

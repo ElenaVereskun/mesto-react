@@ -30,14 +30,14 @@ class Api {
             .then(res => this._errorCheck(res))
     }
     //4. Добавление новой карточки
-    createCard({ place, link }) {
+    createCard({ name, link }) {
         return fetch(`${this.url}/cards`, {
             method: 'Post',
             headers: {
                 authorization: '8f35f71b-a7e4-4bcd-adfc-0c93657d6d95',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ place, link })
+            body: JSON.stringify({ name, link })
         }).then(res => this._errorCheck(res))
     }
     //7. Удаление карточки
