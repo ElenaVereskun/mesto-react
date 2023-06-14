@@ -1,20 +1,26 @@
 import React from 'react';
+import { useState } from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Card({ card, onCardClick, onCardLike, onCardDelete }) {
-  const { name, link } = card;
+  const { name, link, likes } = card;
   const currentUser = React.useContext(CurrentUserContext);
+  const [count, setCount] = useState(likes.length);
 
   function handleClick() {
     onCardClick(card);
   }
   function handleLikeClick() {
     onCardLike(card);
+    if (isLiked) {
+      setCount(count - 1);
+    } else {
+      setCount(count + 1);
+    }
   }
   function handleDeleteClick() {
     onCardDelete(card);
   }
-
   // Определяем, являемся ли мы владельцем текущей карточки  
   const isOwn = card.owner._id === currentUser._id;
   // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
@@ -23,6 +29,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   const cardLikeButtonClassName = (
     `element__like ${isLiked && 'element__like_active'}`
   )
+
   return (
     <li className="element">
       <div className="element__image">
@@ -38,7 +45,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
           <button
             className={cardLikeButtonClassName}
             onClick={handleLikeClick}></button>
-          <p className="element__like-count">0</p>
+          <p className="element__like-count">{count}</p>
         </div>
       </div>
     </li>

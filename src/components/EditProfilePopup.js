@@ -21,7 +21,7 @@ function EditProfilePopup(props) {
     useEffect(() => {
         setName(currentUser.name ?? "");
         setDescription(currentUser.about ?? "");
-    }, [currentUser]);
+    }, [currentUser, props.isOpen]);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -38,17 +38,14 @@ function EditProfilePopup(props) {
             buttonText={'Сохранить'}
             isOpen={props.isOpen}
             onClose={props.onClose}
-            onSubmit={handleSubmit}
-            children={
-                <div>
-                    <input onChange={handleChangeName} value={name} className="popup-profile__user popup-profile__user_info_name popup__input" id="input-name"
-                        type="text" name="name" placeholder="Имя пользователя" required />
-                    <span className="popup__error input-name-error" id="input-name-error"></span>
-                    <input onChange={handleChangeDescription} value={description} className="popup-profile__user popup-profile__user_info_job popup__input" id="input-job" type="text"
-                        name="job" placeholder="Род деятельности" required />
-                    <span className="popup__error input-job-error" id="input-job-error"></span>
-                </div>
-            } />
+            onSubmit={handleSubmit}>
+            <input onChange={handleChangeName} value={name} className="popup-profile__user popup-profile__user_info_name popup__input" id="input-name"
+                type="text" name="name" placeholder="Имя пользователя" required />
+            <span className="popup__error input-name-error" id="input-name-error"></span>
+            <input onChange={handleChangeDescription} value={description} className="popup-profile__user popup-profile__user_info_job popup__input" id="input-job" type="text"
+                name="job" placeholder="Род деятельности" required />
+            <span className="popup__error input-job-error" id="input-job-error"></span>
+        </PopupWithForm>
     )
 }
 export default EditProfilePopup;

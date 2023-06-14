@@ -9,26 +9,9 @@ function Main({
     onCardClick,
     onCardLike,
     onCardDelete,
-    cards,
+    cards
 }) {
     const currentUser = React.useContext(CurrentUserContext);
-/*     const [cards, setCards] = useState([]);
-    useEffect(() => {
-        api.getCards()
-            .then((data) => {
-                setCards(
-                    data.map((res) => ({
-                        likes: res.likes,
-                        link: res.link,
-                        name: res.name,
-                        key: res._id,
-                        _id: res._id,
-                        owner: res.owner,
-                    }))
-                );
-            })
-            .catch((err) => console.log(err));
-    }, []); */
 
     return (
         <main className="page">
@@ -57,7 +40,7 @@ function Main({
                             onCardClick={onCardClick}
                             onCardLike={onCardLike}
                             onCardDelete={onCardDelete}
-                            key={card._id} >
+                            key={card._id}>
                         </Card>
                     ))}
                 </ul>

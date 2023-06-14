@@ -66,7 +66,6 @@ function App() {
         .catch((err) => console.log(`Ошибка удаления лайка: ${err}`));
     }
   }
-
   function handleCardDelete(card) {
     api.deleteCard(card._id)
       .then(() => {

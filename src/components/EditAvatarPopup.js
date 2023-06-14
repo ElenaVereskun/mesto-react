@@ -18,14 +18,11 @@ function EditAvatarPopup(props) {
             buttonText={'Сохранить'}
             isOpen={props.isOpen}
             onClose={props.onClose}
-            onSubmit={handleSubmit}
-            children={
-                <div>
-                    <input src=" " ref={avatarRef} className="popup__input popup-avatar__link" type="url" id="input-link-avatar" name="link"
-                        placeholder="Ссылка на аватар" required />
-                    <span className="popup__error input-link-avatar-error" id="input-link-avatar-error"></span>
-                </div>
-            } />
+            onSubmit={handleSubmit}>
+            <input src=" " ref={avatarRef} className="popup__input popup-avatar__link" type="url" id="input-link-avatar" name="link"
+                placeholder="Ссылка на аватар" required />
+            <span className="popup__error input-link-avatar-error" id="input-link-avatar-error"></span>
+        </PopupWithForm>
     )
 }
 export default EditAvatarPopup;

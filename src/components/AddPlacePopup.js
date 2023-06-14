@@ -1,15 +1,28 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
-    const placeRef = React.useRef();
-    const linkRef = React.useRef();
+    const [place, setPlace] = useState('');
+    const [link, setLink] = useState('');
+
+    function handleChangePlace(e) {
+        setPlace(e.target.value);
+    }
+    function handleChangeLink(e) {
+        setLink(e.target.value);
+    }
+    useEffect(() => {
+        setPlace('');
+        setLink('');
+    }, [isOpen]);
 
     function handleSubmit(e) {
         e.preventDefault();
+        // Передаём значения управляемых компонентов во внешний обработчик
         onAddPlace({
-            name: placeRef.current.value,
-            link: linkRef.current.value
+            name: place,
+            link,
         });
     }
 
@@ -20,17 +33,14 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
             buttonText={'Создать'}
             isOpen={isOpen}
             onClose={onClose}
-            onSubmit={handleSubmit}
-            children={
-                <div>
-                    <input className="popup__input popup-add__place" ref={placeRef} type="text" id="input-place" name="name"
-                        placeholder="Название" required />
-                    <span className="popup__error input-place-error" id="input-place-error"></span>
-                    <input className="popup__input popup-add__link" ref={linkRef} type="url" id="input-link" name="link"
-                        placeholder="Ссылка на картинку" required />
-                    <span className="popup__error input-link-error" id="input-link-error"></span>
-                </div>
-            } />
+            onSubmit={handleSubmit}>
+            <input className="popup__input popup-add__place" onChange={handleChangePlace} value={place} type="text" id="input-place" name="name"
+                placeholder="Название" required />
+            <span className="popup__error input-place-error" id="input-place-error"></span>
+            <input className="popup__input popup-add__link" onChange={handleChangeLink} value={link} type="url" id="input-link" name="link"
+                placeholder="Ссылка на картинку" required />
+            <span className="popup__error input-link-error" id="input-link-error"></span>
+        </PopupWithForm>
     )
 }
 export default AddPlacePopup;
